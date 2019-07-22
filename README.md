@@ -1,5 +1,8 @@
 # Key Allocation for Protected PANs on AWS Services (KAPPAS)
-![alt text](https://mythology.net/wp-content/uploads/2018/04/Kappa.jpg)
+
+<div align="center">
+  <img src=https://mythology.net/wp-content/uploads/2018/04/Kappa.jpg>
+</div>
 
 ## Overview
 KAPPAS is a PCI DSS compliant PAN storage solution for AWS that allows services to store and 
