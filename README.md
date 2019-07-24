@@ -16,3 +16,4 @@ to protect consumers and avoid liability by forcing businesses involved in the p
 
 ## Useful Links
 - Making AWS services PCI compliant: https://cloudacademy.com/blog/how-to-make-your-infrastructure-compliant-with-pci-dss-on-aws/
+- Config options for the serverless framework: https://serverless.com/framework/docs/providers/aws/guide/functions/
