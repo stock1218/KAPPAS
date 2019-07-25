@@ -25,9 +25,7 @@ provider:
       securityGroupIds:
         - Ref: LambdaSecurityGroup
       subnetIds:
-        - Ref: PrivateSubnet1
-        - Ref: PrivateSubnet2
-        - Ref: PrivateSubnet3
+        - Ref: LambdaPrivateSubnet
 
 # you can overwrite defaults here
 #  stage: dev
@@ -128,7 +126,7 @@ resources:
         VpcId:
           Ref: Vpc 
 
-    PrivateSubnet1:
+    LambdaPrivateSubnet:
       Type: AWS::EC2::Subnet
       Properties:
         AvailabilityZone: us-east-1a
@@ -136,29 +134,13 @@ resources:
         VpcId:
           Ref: Vpc
 
-    PrivateSubnet2:
+    RDSPrivateSubnet:
       Type: AWS::EC2::Subnet
       Properties:
         AvailabilityZone: us-east-1b
         CidrBlock: 10.0.2.0/24
         VpcId:
-          Ref: Vpc
-
-    PrivateSubnet3:
-      Type: AWS::EC2::Subnet
-      Properties:
-        AvailabilityZone: us-east-1c
-        CidrBlock: 10.0.3.0/24
-        VpcId:
-          Ref: Vpc    
-
-    PublicSubnet1:
-      Type: AWS::EC2::Subnet
-      Properties:
-        AvailabilityZone: us-east-1d
-        CidrBlock: 10.0.21.0/24
-        VpcId:
-          Ref: Vpc
+          Ref: Vpc  
 
     Eip:
       Type: AWS::EC2::EIP
@@ -173,7 +155,7 @@ resources:
             - Eip
             - AllocationId
         SubnetId:
-          Ref: PrivateSubnet1
+          Ref: LambdaPrivateSubnet
 
     PrivateRouteTable:
       Type: AWS::EC2::RouteTable
@@ -190,29 +172,13 @@ resources:
         NatGatewayId:
           Ref: NatGateway
 
-    SubnetRouteTableAssociationPrivate1:
+    SubnetRouteTableAssociationLambda:
       Type: AWS::EC2::SubnetRouteTableAssociation
       Properties:
         SubnetId:
-          Ref: PrivateSubnet1
+          Ref: LambdaPrivateSubnet
         RouteTableId:
-          Ref: PrivateRouteTable
-
-    SubnetRouteTableAssociationPrivate2:
-      Type: AWS::EC2::SubnetRouteTableAssociation
-      Properties:
-        SubnetId:
-          Ref: PrivateSubnet2
-        RouteTableId:
-          Ref: PrivateRouteTable
-
-    SubnetRouteTableAssociationPrivate3:
-      Type: AWS::EC2::SubnetRouteTableAssociation
-      Properties:
-        SubnetId:
-          Ref: PrivateSubnet3
-        RouteTableId:
-          Ref: PrivateRouteTable    
+          Ref: PrivateRouteTable  
 
     InternetGateway:
       Type: AWS::EC2::InternetGateway
@@ -224,26 +190,3 @@ resources:
           Ref: Vpc
         InternetGatewayId:
           Ref: InternetGateway
-
-    PublicRouteTable:
-      Type: AWS::EC2::RouteTable
-      Properties:
-        VpcId:
-          Ref: Vpc
-
-    PublicRoute:
-      Type: AWS::EC2::Route
-      Properties:
-        RouteTableId:
-          Ref: PublicRouteTable
-        DestinationCidrBlock: 0.0.0.0/0
-        GatewayId:
-          Ref: InternetGateway
-
-    SubnetRouteTableAssociationPublic1:
-      Type: AWS::EC2::SubnetRouteTableAssociation
-      Properties:
-        SubnetId:
-          Ref: PublicSubnet1
-        RouteTableId:
-          Ref: PublicRouteTable
