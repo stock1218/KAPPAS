@@ -11,9 +11,7 @@
 #
 # Happy Coding!
 
-service: serverless # NOTE: update this with your service name
-#app: your-app-name
-#tenant: your-tenant-name
+service: KAPPAS # NOTE: update this with your service name
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -23,12 +21,20 @@ frameworkVersion: '>=1.28.0 <2.0.0'
 provider:
   name: aws
   runtime: go1.x
+  vpc:
+      securityGroupIds:
+        - Ref: LambdaSecurityGroup
+      subnetIds:
+        - Ref: PrivateSubnet1
+        - Ref: PrivateSubnet2
+        - Ref: PrivateSubnet3
 
 # you can overwrite defaults here
 #  stage: dev
 #  region: us-east-1
 
 # you can add statements to the Lambda function's IAM Role here
+
 #  iamRoleStatements:
 #    - Effect: "Allow"
 #      Action:
@@ -60,7 +66,7 @@ functions:
     events:
       - http:
           path: put-pan
-          method: get
+          method: put
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
@@ -104,13 +110,140 @@ functions:
 #      variable2: value2
 
 # you can add CloudFormation resource templates here
-#resources:
-#  Resources:
-#    NewResource:
-#      Type: AWS::S3::Bucket
-#      Properties:
-#        BucketName: my-new-bucket
-#  Outputs:
-#     NewOutput:
-#       Description: "Description for the output"
-#       Value: "Some output value"
+resources:
+  Resources:
+    Vpc:
+      Type: AWS::EC2::VPC
+      Properties:
+        CidrBlock: 10.0.0.0/16 
+
+    LambdaSecurityGroup:
+      Type: "AWS::EC2::SecurityGroup"
+      Properties:
+        GroupName: ${self:service}-${self:provider.stage}-lambda
+        GroupDescription: Allow all traffic
+        SecurityGroupIngress:
+          - IpProtocol: -1
+            CidrIp: 127.0.0.1/32
+        VpcId:
+          Ref: Vpc 
+
+    PrivateSubnet1:
+      Type: AWS::EC2::Subnet
+      Properties:
+        AvailabilityZone: us-east-1a
+        CidrBlock: 10.0.1.0/24
+        VpcId:
+          Ref: Vpc
+
+    PrivateSubnet2:
+      Type: AWS::EC2::Subnet
+      Properties:
+        AvailabilityZone: us-east-1b
+        CidrBlock: 10.0.2.0/24
+        VpcId:
+          Ref: Vpc
+
+    PrivateSubnet3:
+      Type: AWS::EC2::Subnet
+      Properties:
+        AvailabilityZone: us-east-1c
+        CidrBlock: 10.0.3.0/24
+        VpcId:
+          Ref: Vpc    
+
+    PublicSubnet1:
+      Type: AWS::EC2::Subnet
+      Properties:
+        AvailabilityZone: us-east-1d
+        CidrBlock: 10.0.21.0/24
+        VpcId:
+          Ref: Vpc
+
+    Eip:
+      Type: AWS::EC2::EIP
+      Properties:
+        Domain: vpc
+
+    NatGateway:
+      Type: AWS::EC2::NatGateway
+      Properties:
+        AllocationId:
+          Fn::GetAtt:
+            - Eip
+            - AllocationId
+        SubnetId:
+          Ref: PrivateSubnet1
+
+    PrivateRouteTable:
+      Type: AWS::EC2::RouteTable
+      Properties:
+        VpcId:
+          Ref: Vpc
+
+    PrivateRoute:
+      Type: AWS::EC2::Route
+      Properties:
+        RouteTableId:
+          Ref: PrivateRouteTable
+        DestinationCidrBlock: 0.0.0.0/0
+        NatGatewayId:
+          Ref: NatGateway
+
+    SubnetRouteTableAssociationPrivate1:
+      Type: AWS::EC2::SubnetRouteTableAssociation
+      Properties:
+        SubnetId:
+          Ref: PrivateSubnet1
+        RouteTableId:
+          Ref: PrivateRouteTable
+
+    SubnetRouteTableAssociationPrivate2:
+      Type: AWS::EC2::SubnetRouteTableAssociation
+      Properties:
+        SubnetId:
+          Ref: PrivateSubnet2
+        RouteTableId:
+          Ref: PrivateRouteTable
+
+    SubnetRouteTableAssociationPrivate3:
+      Type: AWS::EC2::SubnetRouteTableAssociation
+      Properties:
+        SubnetId:
+          Ref: PrivateSubnet3
+        RouteTableId:
+          Ref: PrivateRouteTable    
+
+    InternetGateway:
+      Type: AWS::EC2::InternetGateway
+
+    VPCGatewayAttachment:
+      Type: AWS::EC2::VPCGatewayAttachment
+      Properties:
+        VpcId:
+          Ref: Vpc
+        InternetGatewayId:
+          Ref: InternetGateway
+
+    PublicRouteTable:
+      Type: AWS::EC2::RouteTable
+      Properties:
+        VpcId:
+          Ref: Vpc
+
+    PublicRoute:
+      Type: AWS::EC2::Route
+      Properties:
+        RouteTableId:
+          Ref: PublicRouteTable
+        DestinationCidrBlock: 0.0.0.0/0
+        GatewayId:
+          Ref: InternetGateway
+
+    SubnetRouteTableAssociationPublic1:
+      Type: AWS::EC2::SubnetRouteTableAssociation
+      Properties:
+        SubnetId:
+          Ref: PublicSubnet1
+        RouteTableId:
+          Ref: PublicRouteTable
