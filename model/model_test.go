@@ -2,7 +2,7 @@ package model
 
 import "testing"
 
-// Test if a Model variable can be created
+// TestNewModel tests if a Model variable can be created
 func TestNewModel(t *testing.T) {
 	var _ Model = nil
 }
@@ -18,6 +18,7 @@ func TestNewAmazonModel(t *testing.T) {
 // Declare the model object that will be used for the follwing tests
 var server Model = NewAmazonModel()
 
+// TestGetPAN tests if PutPAN will take a string, and save it to a database
 func TestGetPAN(t *testing.T) {
 	ok := server.PutPAN("123")
 
