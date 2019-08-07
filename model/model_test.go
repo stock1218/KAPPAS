@@ -2,7 +2,7 @@ package model
 
 import "testing"
 
-// TestNewModel tests if a Model variable can be created
+// TestNewModel tests if a Model variable can be created.
 func TestNewModel(t *testing.T) {
 	var _ Model = nil
 }
@@ -15,10 +15,10 @@ func TestNewAWSModel(t *testing.T) {
 	}
 }
 
-// Declare the model object that will be used for the follwing tests
+// Declare the model object that will be used for the follwing tests.
 var server Model = NewAWSModel()
 
-// TestPutAndGetPAN tests if PutPAN will take a string, return an id, and GetPAN() will retrieve it
+// TestPutAndGetPAN tests if PutPAN will take a string, return an id, and GetPAN() will retrieve it.
 func TestPutAndGetPAN(t *testing.T) {
 	data := "123"
 	id, ok := server.PutPAN(data)
@@ -43,7 +43,7 @@ func TestPutAndGetPAN(t *testing.T) {
 }
 
 // TestEncryptAndDecrypt will test if encrypt() will take a plaintext string and encrypt it,
-// and decrypt() will decrypt the ciphertext back into plaintext
+// and decrypt() will decrypt the ciphertext back into plaintext.
 func TestEncryptAndDecrypt(t *testing.T) {
 	plaintext := "my secret"
 	ciphertext, ok := server.encrypt(plaintext)
@@ -65,4 +65,13 @@ func TestEncryptAndDecrypt(t *testing.T) {
 		t.Fail()
 	}
 
+}
+
+// TestGetDatabase will test to see if GetDatabse will return a pointer to the Database the AWSModel is using.
+func TestGetDatabase(t *testing.T) {
+	database := server.(*AWSModel).GetDatabase() // Cast server to a pointer to an AWSModel and call GetDatabase
+	if database == nil {
+		t.Log("GetDatabase() returned nil")
+		t.Fail()
+	}
 }
