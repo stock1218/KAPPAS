@@ -26,9 +26,7 @@ func TestPutAndGetPAN(t *testing.T) {
 	if ok != nil {
 		t.Log("Failed to call PutPAN: ", ok)
 		t.Fail()
-	}
-
-	if id == "" {
+	} else if id == "" {
 		t.Log("PutPAN returned an empty string")
 		t.Fail()
 	}
@@ -38,25 +36,33 @@ func TestPutAndGetPAN(t *testing.T) {
 	if ok != nil {
 		t.Log("Error retrieving PAN: ", ok)
 		t.Fail()
-	}
-
-	if data != getData {
+	} else if data != getData {
 		t.Log("Retrieved data was not correct")
 		t.Fail()
 	}
 }
 
-// TestEncrypt will test if encrypt() will take a plaintext string and encrypt it
-func TestEncrypt(t *testing.T) {
+// TestEncryptAndDecrypt will test if encrypt() will take a plaintext string and encrypt it,
+// and decrypt() will decrypt the ciphertext back into plaintext
+func TestEncryptAndDecrypt(t *testing.T) {
 	plaintext := "my secret"
 	ciphertext, ok := server.encrypt(plaintext)
 
 	if ok != nil {
 		t.Log("Error encrypting data: ", ok)
 		t.Fail()
-	}
-
-	if ciphertext == "" {
+	} else if ciphertext == "" {
 		t.Log("encrypt() returned an empty string")
 	}
+
+	decrypted, ok := server.decrypt(ciphertext)
+
+	if ok != nil {
+		t.Log("Error decrypting data: ", ok)
+		t.Fail()
+	} else if decrypted != plaintext {
+		t.Log("Decrypt() returned wrong plaintext")
+		t.Fail()
+	}
+
 }

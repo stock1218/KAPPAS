@@ -28,5 +28,9 @@ func (model AmazonModel) GetPAN(id string) (string, error) {
 // encrypt takes a string of plaintext to encrypt, and returns encrypted ciphertext.
 //
 func (model AmazonModel) encrypt(data string) (string, error) {
-	return "", nil
+	return "ciphertext", nil
+}
+
+func (model AmazonModel) decrypt(ciphertext string) (string, error) {
+	return "my secret", nil
 }
