@@ -7,16 +7,16 @@ func TestNewModel(t *testing.T) {
 	var _ Model = nil
 }
 
-func TestNewAmazonModel(t *testing.T) {
-	var server Model = NewAmazonModel()
+func TestNewAWSModel(t *testing.T) {
+	var server Model = NewAWSModel()
 	if server == nil {
-		t.Log("Failed to create NewAmazonModel")
+		t.Log("Failed to create NewAWSModel")
 		t.Fail()
 	}
 }
 
 // Declare the model object that will be used for the follwing tests
-var server Model = NewAmazonModel()
+var server Model = NewAWSModel()
 
 // TestPutAndGetPAN tests if PutPAN will take a string, return an id, and GetPAN() will retrieve it
 func TestPutAndGetPAN(t *testing.T) {

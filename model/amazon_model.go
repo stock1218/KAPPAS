@@ -1,36 +1,36 @@
 package model
 
-// AmazonModel is a Model type struct that represents a model that uses AWS services.
+// AWSModel is a Model type struct that represents a model that uses AWS services.
 //
-type AmazonModel struct{}
+type AWSModel struct{}
 
 var pan string
 
-// NewAmazonModel is a function that returns a pointer to a new AmazonModel.
+// NewAWSModel is a function that returns a pointer to a new AWSModel.
 //
-func NewAmazonModel() *AmazonModel {
-	return new(AmazonModel)
+func NewAWSModel() *AWSModel {
+	return new(AWSModel)
 }
 
 // PutPAN takes the data to be saved, and returns the id of the saved data, and an error if there is one.
 //
-func (model AmazonModel) PutPAN(data string) (string, error) {
+func (model AWSModel) PutPAN(data string) (string, error) {
 	pan = data
 	return "1", nil
 }
 
 // GetPAN takes the ID of the PAN being fetched, and returns the saved data, and an error if there is one.
 //
-func (model AmazonModel) GetPAN(id string) (string, error) {
+func (model AWSModel) GetPAN(id string) (string, error) {
 	return pan, nil
 }
 
 // encrypt takes a string of plaintext to encrypt, and returns encrypted ciphertext.
 //
-func (model AmazonModel) encrypt(data string) (string, error) {
+func (model AWSModel) encrypt(data string) (string, error) {
 	return "ciphertext", nil
 }
 
-func (model AmazonModel) decrypt(ciphertext string) (string, error) {
+func (model AWSModel) decrypt(ciphertext string) (string, error) {
 	return "my secret", nil
 }
