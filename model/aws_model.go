@@ -37,7 +37,7 @@ func (model AWSModel) decrypt(ciphertext string) (string, error) {
 	return "my secret", nil
 }
 
-// GetDatabase the pointer to the database currently being used.
+// GetDatabase gets the pointer to the database currently being used.
 //
 func (model AWSModel) GetDatabase() Database {
 	return NewAmazonRDS()
