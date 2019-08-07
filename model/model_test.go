@@ -18,12 +18,30 @@ func TestNewAmazonModel(t *testing.T) {
 // Declare the model object that will be used for the follwing tests
 var server Model = NewAmazonModel()
 
-// TestGetPAN tests if PutPAN will take a string, and save it to a database
-func TestGetPAN(t *testing.T) {
-	ok := server.PutPAN("123")
+// TestPutAndGetPAN tests if PutPAN will take a string, return an id, and GetPAN() will retrieve it
+func TestPutAndGetPAN(t *testing.T) {
+	data := "123"
+	id, ok := server.PutPAN(data)
 
 	if ok != nil {
-		t.Log("Failed to call PutPAN, ", ok)
+		t.Log("Failed to call PutPAN: ", ok)
+		t.Fail()
+	}
+
+	if id == "" {
+		t.Log("PutPAN returned an empty string")
+		t.Fail()
+	}
+
+	getData, ok := server.GetPAN(id)
+
+	if ok != nil {
+		t.Log("Error retrieving PAN: ", ok)
+		t.Fail()
+	}
+
+	if data != getData {
+		t.Log("Retrieved data was not correct")
 		t.Fail()
 	}
 }
