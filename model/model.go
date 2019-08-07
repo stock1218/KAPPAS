@@ -5,4 +5,5 @@ package model
 type Model interface {
 	PutPAN(string) (string, error) // Put a PAN value into a model
 	GetPAN(string) (string, error) // Get a PAN value in a model
+	encrypt(string) (string, error)
 }

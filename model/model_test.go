@@ -45,3 +45,18 @@ func TestPutAndGetPAN(t *testing.T) {
 		t.Fail()
 	}
 }
+
+// TestEncrypt will test if encrypt() will take a plaintext string and encrypt it
+func TestEncrypt(t *testing.T) {
+	plaintext := "my secret"
+	ciphertext, ok := server.encrypt(plaintext)
+
+	if ok != nil {
+		t.Log("Error encrypting data: ", ok)
+		t.Fail()
+	}
+
+	if ciphertext == "" {
+		t.Log("encrypt() returned an empty string")
+	}
+}
