@@ -9,3 +9,9 @@ type AmazonModel struct{}
 func NewAmazonModel() *AmazonModel {
 	return new(AmazonModel)
 }
+
+// PutPAN takes the ID of the PAN being fetched, and returns an error if there is one
+//
+func (model AmazonModel) PutPAN(id string) error {
+	return nil
+}

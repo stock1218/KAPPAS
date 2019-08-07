@@ -14,3 +14,15 @@ func TestNewAmazonModel(t *testing.T) {
 		t.Fail()
 	}
 }
+
+// Declare the model object that will be used for the follwing tests
+var server Model = NewAmazonModel()
+
+func TestGetPAN(t *testing.T) {
+	ok := server.PutPAN("123")
+
+	if ok != nil {
+		t.Log("Failed to call PutPAN, ", ok)
+		t.Fail()
+	}
+}
