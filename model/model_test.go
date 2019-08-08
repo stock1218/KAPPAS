@@ -83,3 +83,12 @@ func TestSetAndGetDatabase(t *testing.T) {
 		t.Fail()
 	}
 }
+
+// TestGetKey will test if GetKey will return a Key
+func TestGetKey(t *testing.T) {
+	key := server.(*AWSModel).GetKey()
+	if key == nil {
+		t.Log("GetKey returned nil")
+		t.Fail()
+	}
+}

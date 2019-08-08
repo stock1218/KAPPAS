@@ -52,3 +52,9 @@ func (model AWSModel) GetDatabase() Database {
 func (model *AWSModel) SetDatabase(newDB Database) {
 	model.database = newDB
 }
+
+// GetKey will return a pointer to the key currently being used.
+//
+func (model *AWSModel) GetKey() Key {
+	return new(Key)
+}
