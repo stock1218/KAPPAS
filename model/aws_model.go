@@ -2,14 +2,18 @@ package model
 
 // AWSModel is a Model type struct that represents a model that uses AWS services.
 //
-type AWSModel struct{}
+type AWSModel struct {
+	database Database
+}
 
 var pan string
 
 // NewAWSModel is a function that returns a pointer to a new AWSModel.
 //
 func NewAWSModel() *AWSModel {
-	return new(AWSModel)
+	model := new(AWSModel)
+	model.SetDatabase(NewAmazonRDS())
+	return model
 }
 
 // PutPAN takes the data to be saved, and returns the id of the saved data, and an error if there is one.
@@ -40,6 +44,11 @@ func (model AWSModel) decrypt(ciphertext string) (string, error) {
 // GetDatabase gets the pointer to the database currently being used.
 //
 func (model AWSModel) GetDatabase() Database {
-	return NewAmazonRDS()
+	return model.database
+}
 
+// SetDatabase sets the pointer to the database currently being used.
+//
+func (model *AWSModel) SetDatabase(newDB Database) {
+	model.database = newDB
 }

@@ -1,6 +1,8 @@
 package model
 
-import "testing"
+import (
+	"testing"
+)
 
 // TestNewModel tests if a Model variable can be created.
 func TestNewModel(t *testing.T) {
@@ -67,11 +69,17 @@ func TestEncryptAndDecrypt(t *testing.T) {
 
 }
 
-// TestGetDatabase will test to see if GetDatabse will return a pointer to the Database the AWSModel is using.
-func TestGetDatabase(t *testing.T) {
+// TestSetAndGetDatabase will test to see if SetDatabase will set the database the AWSModel is uing, and GetDatabse will return it.
+func TestSetAndGetDatabase(t *testing.T) {
+	testDB := NewAmazonRDS()
+	server.(*AWSModel).SetDatabase(testDB)
 	database := server.(*AWSModel).GetDatabase() // Cast server to a pointer to an AWSModel and call GetDatabase
+
 	if database == nil {
 		t.Log("GetDatabase() returned nil")
+		t.Fail()
+	} else if testDB != database {
+		t.Log("GetDatabase returned incorrect value, or SetDatabase set incorrect value")
 		t.Fail()
 	}
 }
