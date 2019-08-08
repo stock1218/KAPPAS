@@ -4,6 +4,7 @@ package model
 //
 type AWSModel struct {
 	database Database
+	key      Key
 }
 
 var pan string
@@ -13,6 +14,7 @@ var pan string
 func NewAWSModel() *AWSModel {
 	model := new(AWSModel)
 	model.SetDatabase(NewAmazonRDS())
+	model.SetKey(NewKMS())
 	return model
 }
 
@@ -41,7 +43,7 @@ func (model AWSModel) decrypt(ciphertext string) (string, error) {
 	return "my secret", nil
 }
 
-// GetDatabase gets the pointer to the database currently being used.
+// GetDatabase gets a copy of the database currently being used.
 //
 func (model AWSModel) GetDatabase() Database {
 	return model.database
@@ -53,8 +55,14 @@ func (model *AWSModel) SetDatabase(newDB Database) {
 	model.database = newDB
 }
 
-// GetKey will return a pointer to the key currently being used.
+// GetKey will return a copy of the key currently being used.
 //
-func (model *AWSModel) GetKey() Key {
-	return new(Key)
+func (model AWSModel) GetKey() Key {
+	return model.key
+}
+
+// SetKey sets the pointer to the database currently being used.
+//
+func (model *AWSModel) SetKey(newKey Key) {
+	model.key = newKey
 }

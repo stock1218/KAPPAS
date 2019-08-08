@@ -84,11 +84,15 @@ func TestSetAndGetDatabase(t *testing.T) {
 	}
 }
 
-// TestGetKey will test if GetKey will return a Key
-func TestGetKey(t *testing.T) {
-	key := server.(*AWSModel).GetKey()
-	if key == nil {
+// TestSetAndGetKey will test if SetKey will set the key used by the AWSModel, and GetKey will return it back.
+func TestSetAndGetKey(t *testing.T) {
+	myKey := NewKMS()
+	server.(*AWSModel).SetKey(myKey)
+	getKey := server.(*AWSModel).GetKey()
+	if getKey == nil {
 		t.Log("GetKey returned nil")
 		t.Fail()
+	} else if myKey != getKey {
+		t.Log("GetKey returned incorrect value, or SetKey set incorrect value")
 	}
 }
