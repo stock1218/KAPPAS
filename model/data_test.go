@@ -50,8 +50,25 @@ func TestSetAndIsEncrypted(t *testing.T) {
 	returnedState := pan.IsEncrypted()
 
 	if myState != returnedState {
-		t.Log("Data: SetEncrypted set the wrong state or IsEncrypted returned the wrong state")
+		t.Log("Data: SetEncrypted set the wrong state, or IsEncrypted returned the wrong state")
 		t.Fail()
 	}
 
+}
+
+// TestSetAndGetID tests if SetId will set the id of a given pan struct, and GetId will return it.
+//
+func TestSetAndGetID(t *testing.T) {
+	pan := PANSetUp()
+	initialID := "abc123"
+	pan.SetID(initialID)
+
+	returnedID := pan.GetID()
+
+	if returnedID == "" {
+		t.Log("Data: GetId returned empty string")
+		t.Fail()
+	} else if initialID != returnedID {
+		t.Log("Data: SetId didn't set the correct ID, or GetId returned the wrong ID")
+	}
 }
