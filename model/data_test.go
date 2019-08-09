@@ -72,3 +72,16 @@ func TestSetAndGetID(t *testing.T) {
 		t.Log("Data: SetId didn't set the correct ID, or GetId returned the wrong ID")
 	}
 }
+
+// TestSetAndGetCardNumber tests if SetCardNumber will set card-number in a pan struct, and GetCardNumber will return it.
+func TestSetAndGetCardNumber(t *testing.T) {
+	pan := PANSetUp()
+	initialNumber := "123456789"
+	pan.(*PAN).SetCardNumber(initialNumber)
+
+	returnedCardNumber := pan.(*PAN).GetCardNumber()
+	if returnedCardNumber != initialNumber {
+		t.Log("Data: SetCardNumber set the wrong value, or GetCardNumber returned the wrong value")
+		t.Fail()
+	}
+}
