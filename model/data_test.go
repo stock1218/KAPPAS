@@ -20,8 +20,9 @@ func TestNewPANModel(t *testing.T) {
 
 // PanSetUp is a setup function for creating a testable PAN.
 //
-func PANSetUp() *PAN {
-	return NewPAN()
+func PANSetUp() Data {
+	var pan Data = NewPAN()
+	return pan
 }
 
 // TestSetAndGetPayload tests if GetPayload will return a string.
