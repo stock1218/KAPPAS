@@ -9,3 +9,9 @@ type PAN struct{}
 func NewPAN() *PAN {
 	return new(PAN)
 }
+
+// GetPayload will return the a string representation of the data stored in this Data.
+//
+func (pan PAN) GetPayload() string {
+	return "payload"
+}
