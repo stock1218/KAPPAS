@@ -1,13 +1,16 @@
 package model
 
+import "time"
+
 // PAN is a Key type that encapsulates PAN data.
 //
 type PAN struct {
-	id          string
-	payload     string
-	isEncrypted bool
-	cardNumber  string
-	CardHolder  string
+	id             string
+	payload        string
+	isEncrypted    bool
+	cardNumber     string
+	cardHolder     string
+	experationDate time.Time
 }
 
 // NewPAN returns a pointer to a new PAN struct.
@@ -67,11 +70,23 @@ func (pan *PAN) SetCardNumber(newCardNumber string) {
 // GetCardHolder returns the card holder of the pan.
 //
 func (pan PAN) GetCardHolder() string {
-	return pan.CardHolder
+	return pan.cardHolder
 }
 
 // SetCardHolder sets the card holder of the pan.
 //
 func (pan *PAN) SetCardHolder(newCardHolder string) {
-	pan.CardHolder = newCardHolder
+	pan.cardHolder = newCardHolder
+}
+
+// GetExperationDate returns the experation date of the pan.
+//
+func (pan PAN) GetExperationDate() time.Time {
+	return pan.experationDate
+}
+
+// SetExperationDate sets the experation date of the pan.
+//
+func (pan *PAN) SetExperationDate(newDate time.Time) {
+	pan.experationDate = newDate
 }

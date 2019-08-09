@@ -2,6 +2,7 @@ package model
 
 import (
 	"testing"
+	"time"
 )
 
 // TestNewData will test if a data variable can be created.
@@ -86,8 +87,8 @@ func TestSetAndGetCardNumber(t *testing.T) {
 	}
 }
 
-// TestSetAndGetHolder tests if SetCardHolder will set card-holder in a pan struct, and GetCardHolder will return it.
-func TestSetAndGetHolder(t *testing.T) {
+// TestSetAndGetCardHolder tests if SetCardHolder will set card-holder in a pan struct, and GetCardHolder will return it.
+func TestSetAndGetCardHolder(t *testing.T) {
 	pan := PANSetUp()
 	initialName := "John Doe"
 	pan.(*PAN).SetCardHolder(initialName)
@@ -96,6 +97,21 @@ func TestSetAndGetHolder(t *testing.T) {
 	if initialName != returnedName {
 		t.Log("Data: SetCardHolder set the wrong value, or GetCardHolder returned the wrong value")
 		t.Fail()
+	}
+
+}
+
+// TestSetAndGetExperationDate tests if SetExperationDate will set the experation date in a pan struct,
+// and GetCardHolder will return it.
+func TestSetAndGetExperationDate(t *testing.T) {
+	pan := PANSetUp()
+	initialDate := time.Now()
+
+	pan.(*PAN).SetExperationDate(initialDate)
+	returnedDate := pan.(*PAN).GetExperationDate()
+
+	if initialDate != returnedDate {
+		t.Log("Data: SetExperationDate set the wrong value, or GetExperationDate returned the wrong value")
 	}
 
 }
