@@ -115,3 +115,19 @@ func TestToJSON(t *testing.T) {
 		t.Fail()
 	}
 }
+
+// TestFromJSON tests if a pan struct can be created from a JSON string.
+//
+func TestFromJSON(t *testing.T) {
+	expectedPan := PANSetUp()
+	expectedPan.SetID("123")
+
+	panString := `{"id":"123","cardNumber":"","cardHolder":"","experationDate":"0001-01-01T00:00:00Z","billingAddress":""}`
+
+	testPan := NewPANFromJSON(panString)
+
+	if expectedPan.GetID() != testPan.GetID() {
+		t.Log("Data: FromJSON didn't set the correct values")
+		t.Fail()
+	}
+}

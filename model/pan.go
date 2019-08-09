@@ -31,6 +31,14 @@ func NewPAN() *PAN {
 	return new(PAN)
 }
 
+// NewPANFromJSON takes a JSON string and returns a pointer to a new PAN struct with vales from the JSON.
+//
+func NewPANFromJSON(newPan string) *PAN {
+	jsonPan := new(panJSON)
+	json.Unmarshal([]byte(newPan), jsonPan)
+	finalPan := PAN{jsonPan.ID, jsonPan.CardNumber, jsonPan.CardHolder, jsonPan.ExperationDate, jsonPan.BillingAddress}
+	return &finalPan
+}
 // ToJSON converts a pan struct to a JSON string.
 //
 func (pan PAN) ToJSON() []byte {
