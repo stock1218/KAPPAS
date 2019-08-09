@@ -101,6 +101,9 @@ func TestSetAndGetExperationDate(t *testing.T) {
 
 }
 
+// TestSentAndGetBillingAddress tests if SetBillingAddress will set the billing address of a pan,
+// and GetBillingAddress will return it.
+//
 func TestSetAndGetBillingAddress(t *testing.T) {
 	pan := PANSetUp()
 	initialAddress := "123 4th Ave, Apt. 5E, New York NY 67890"
