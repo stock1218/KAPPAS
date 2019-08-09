@@ -40,3 +40,10 @@ func TestSetAndGetPayload(t *testing.T) {
 		t.Log("Data: GetPayload didn't return correct payload, or SetPayload didn't set correct payload")
 	}
 }
+
+// TestIsEncrypted tests if IsEncrypted will return a boolean
+func TestIsEncrypted(t *testing.T) {
+	pan := PANSetUp()
+	_ = pan.IsEncrypted() // bool is false by default, so don't need to test it has a value
+
+}

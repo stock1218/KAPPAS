@@ -3,7 +3,8 @@ package model
 // PAN is a Key type that encapsulates PAN data.
 //
 type PAN struct {
-	payload string
+	payload     string
+	isEncrypted bool
 }
 
 // NewPAN returns a pointer to a new PAN struct.
@@ -22,4 +23,10 @@ func (pan PAN) GetPayload() string {
 //
 func (pan *PAN) SetPayload(newPayload string) {
 	pan.payload = newPayload
+}
+
+// IsEncrypted returns a bool that indicates if the pan payload is encrypted
+//
+func (pan *PAN) IsEncrypted() bool {
+	return pan.isEncrypted
 }
