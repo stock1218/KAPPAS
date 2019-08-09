@@ -41,9 +41,17 @@ func TestSetAndGetPayload(t *testing.T) {
 	}
 }
 
-// TestIsEncrypted tests if IsEncrypted will return a boolean
-func TestIsEncrypted(t *testing.T) {
+// TestSetAndIsEncrypted tests if SetEncrypted will set a Data struct's encrypted state, and
+// IsEncrypted will return it.
+func TestSetAndIsEncrypted(t *testing.T) {
 	pan := PANSetUp()
-	_ = pan.IsEncrypted() // bool is false by default, so don't need to test it has a value
+	myState := true
+	pan.SetEncrypted(myState)
+	returnedState := pan.IsEncrypted()
+
+	if myState != returnedState {
+		t.Log("Data: SetEncrypted set the wrong state or IsEncrypted returned the wrong state")
+		t.Fail()
+	}
 
 }

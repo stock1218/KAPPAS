@@ -27,6 +27,12 @@ func (pan *PAN) SetPayload(newPayload string) {
 
 // IsEncrypted returns a bool that indicates if the pan payload is encrypted
 //
-func (pan *PAN) IsEncrypted() bool {
+func (pan PAN) IsEncrypted() bool {
 	return pan.isEncrypted
+}
+
+// SetEncrypted sets the encrypted state of the pan
+//
+func (pan *PAN) SetEncrypted(newState bool) {
+	pan.isEncrypted = newState
 }
