@@ -1,6 +1,9 @@
 package model
 
-import "time"
+import (
+	"encoding/json"
+	"time"
+)
 
 // PAN is a Key type that encapsulates PAN data.
 //
@@ -12,10 +15,28 @@ type PAN struct {
 	billingAddress string
 }
 
+// panJSON is a struct that facilitiates Unmarshaling data from JSON to a pan struct.
+//
+type panJSON struct {
+	ID             string    `json:"id"`
+	CardNumber     string    `json:"cardNumber"`
+	CardHolder     string    `json:"cardHolder"`
+	ExperationDate time.Time `json:"experationDate"`
+	BillingAddress string    `json:"billingAddress"`
+}
+
 // NewPAN returns a pointer to a new PAN struct.
 //
 func NewPAN() *PAN {
 	return new(PAN)
+}
+
+// ToJSON converts a pan struct to a JSON string.
+//
+func (pan PAN) ToJSON() []byte {
+	newJSON := panJSON{pan.id, pan.cardNumber, pan.cardHolder, pan.experationDate, pan.billingAddress}
+	result, _ := json.Marshal(newJSON)
+	return result
 }
 
 // GetID returns the ID of the pan.

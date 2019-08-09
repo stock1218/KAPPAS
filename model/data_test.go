@@ -100,3 +100,18 @@ func TestSetAndGetBillingAddress(t *testing.T) {
 		t.Fail()
 	}
 }
+
+// TestToJSON tests if a pan struct can be converted to and from JSON.
+//
+func TestToJSON(t *testing.T) {
+	pan := PANSetUp()
+	pan.SetID("123")
+
+	returned := pan.ToJSON()
+
+	expected := `{"id":"123","cardNumber":"","cardHolder":"","experationDate":"0001-01-01T00:00:00Z","billingAddress":""}`
+	if string(returned) != expected {
+		t.Log("Data: ToJSON failed to return the correct JSON")
+		t.Fail()
+	}
+}
