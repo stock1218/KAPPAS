@@ -115,3 +115,16 @@ func TestSetAndGetExperationDate(t *testing.T) {
 	}
 
 }
+
+func TestSetAndGetBillingAddress(t *testing.T) {
+	pan := PANSetUp()
+	initialAddress := "123 4th Ave, Apt. 5E, New York NY 67890"
+
+	pan.(*PAN).SetBillingAddress(initialAddress)
+	returnAddress := pan.(*PAN).GetBillingAddress()
+
+	if initialAddress != returnAddress {
+		t.Log("Data: SetBillingAddress set the wrong value, or GetBillingAddress returned the wrong value")
+		t.Fail()
+	}
+}

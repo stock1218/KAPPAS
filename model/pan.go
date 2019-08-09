@@ -11,6 +11,7 @@ type PAN struct {
 	cardNumber     string
 	cardHolder     string
 	experationDate time.Time
+	billingAddress string
 }
 
 // NewPAN returns a pointer to a new PAN struct.
@@ -89,4 +90,16 @@ func (pan PAN) GetExperationDate() time.Time {
 //
 func (pan *PAN) SetExperationDate(newDate time.Time) {
 	pan.experationDate = newDate
+}
+
+// GetBillingAddress returns the billing address of the pan.
+//
+func (pan PAN) GetBillingAddress() string {
+	return pan.billingAddress
+}
+
+// SetBillingAddress sets the billing address of the pan.
+//
+func (pan *PAN) SetBillingAddress(newAddress string) {
+	pan.billingAddress = newAddress
 }
