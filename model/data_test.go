@@ -24,14 +24,18 @@ func PANSetUp() *PAN {
 	return NewPAN()
 }
 
-// TestGetPayload tests if GetPayload will return a string.
+// TestSetAndGetPayload tests if GetPayload will return a string.
 //
-func TestGetPayload(t *testing.T) {
+func TestSetAndGetPayload(t *testing.T) {
 	pan := PANSetUp()
-	payload := pan.GetPayload()
+	myPayload := "payload"
+	pan.SetPayload(myPayload)
+	testPayload := pan.GetPayload()
 
-	if payload == "" {
+	if testPayload == "" {
 		t.Log("Data: GetPayload returned empty string")
 		t.Fail()
+	} else if myPayload == testPayload {
+		t.Log("Data: GetPayload didn't return correct payload, or SetPayload didn't set correct payload")
 	}
 }
