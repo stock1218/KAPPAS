@@ -7,6 +7,7 @@ type PAN struct {
 	payload     string
 	isEncrypted bool
 	cardNumber  string
+	CardHolder  string
 }
 
 // NewPAN returns a pointer to a new PAN struct.
@@ -61,4 +62,16 @@ func (pan PAN) GetCardNumber() string {
 //
 func (pan *PAN) SetCardNumber(newCardNumber string) {
 	pan.cardNumber = newCardNumber
+}
+
+// GetCardHolder returns the card holder of the pan.
+//
+func (pan PAN) GetCardHolder() string {
+	return pan.CardHolder
+}
+
+// SetCardHolder sets the card holder of the pan.
+//
+func (pan *PAN) SetCardHolder(newCardHolder string) {
+	pan.CardHolder = newCardHolder
 }

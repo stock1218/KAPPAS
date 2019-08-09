@@ -85,3 +85,17 @@ func TestSetAndGetCardNumber(t *testing.T) {
 		t.Fail()
 	}
 }
+
+// TestSetAndGetHolder tests if SetCardHolder will set card-holder in a pan struct, and GetCardHolder will return it.
+func TestSetAndGetHolder(t *testing.T) {
+	pan := PANSetUp()
+	initialName := "John Doe"
+	pan.(*PAN).SetCardHolder(initialName)
+
+	returnedName := pan.(*PAN).GetCardHolder()
+	if initialName != returnedName {
+		t.Log("Data: SetCardHolder set the wrong value, or GetCardHolder returned the wrong value")
+		t.Fail()
+	}
+
+}
