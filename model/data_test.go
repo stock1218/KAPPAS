@@ -26,22 +26,6 @@ func PANSetUp() Data {
 	return pan
 }
 
-// TestSetAndGetPayload tests if SetPayload will set a Data struct's payload GetPayload will return it.
-//
-func TestSetAndGetPayload(t *testing.T) {
-	pan := PANSetUp()
-	myPayload := "payload"
-	pan.SetPayload(myPayload)
-	testPayload := pan.GetPayload()
-
-	if testPayload == "" {
-		t.Log("Data: GetPayload returned empty string")
-		t.Fail()
-	} else if myPayload == testPayload {
-		t.Log("Data: GetPayload didn't return correct payload, or SetPayload didn't set correct payload")
-	}
-}
-
 // TestSetAndGetID tests if SetId will set the id of a given pan struct, and GetId will return it.
 //
 func TestSetAndGetID(t *testing.T) {
