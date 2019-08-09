@@ -25,7 +25,7 @@ func PANSetUp() Data {
 	return pan
 }
 
-// TestSetAndGetPayload tests if GetPayload will return a string.
+// TestSetAndGetPayload tests if SetPayload will set a Data struct's payload GetPayload will return it.
 //
 func TestSetAndGetPayload(t *testing.T) {
 	pan := PANSetUp()
