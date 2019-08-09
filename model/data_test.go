@@ -42,21 +42,6 @@ func TestSetAndGetPayload(t *testing.T) {
 	}
 }
 
-// TestSetAndIsEncrypted tests if SetEncrypted will set a Data struct's encrypted state, and
-// IsEncrypted will return it.
-func TestSetAndIsEncrypted(t *testing.T) {
-	pan := PANSetUp()
-	myState := true
-	pan.SetEncrypted(myState)
-	returnedState := pan.IsEncrypted()
-
-	if myState != returnedState {
-		t.Log("Data: SetEncrypted set the wrong state, or IsEncrypted returned the wrong state")
-		t.Fail()
-	}
-
-}
-
 // TestSetAndGetID tests if SetId will set the id of a given pan struct, and GetId will return it.
 //
 func TestSetAndGetID(t *testing.T) {

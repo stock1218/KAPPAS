@@ -7,7 +7,6 @@ import "time"
 type PAN struct {
 	id             string
 	payload        string
-	isEncrypted    bool
 	cardNumber     string
 	cardHolder     string
 	experationDate time.Time
@@ -30,18 +29,6 @@ func (pan PAN) GetPayload() string {
 //
 func (pan *PAN) SetPayload(newPayload string) {
 	pan.payload = newPayload
-}
-
-// IsEncrypted returns a bool that indicates if the pan payload is encrypted.
-//
-func (pan PAN) IsEncrypted() bool {
-	return pan.isEncrypted
-}
-
-// SetEncrypted sets the encrypted state of the pan.
-//
-func (pan *PAN) SetEncrypted(newState bool) {
-	pan.isEncrypted = newState
 }
 
 // GetID returns the ID of the pan.
