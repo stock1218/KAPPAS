@@ -1,4 +1,4 @@
-package model
+package key
 
 // KMS represents an abstraction of the AWS key management system (KMS).
 //

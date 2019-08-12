@@ -2,6 +2,8 @@ package model
 
 import (
 	"testing"
+
+	"github.com/stock1218/KAPPAS/model/key"
 )
 
 // TestNewModel tests if a Model variable can be created.
@@ -86,7 +88,7 @@ func TestSetAndGetDatabase(t *testing.T) {
 
 // TestSetAndGetKey will test if SetKey will set the key used by the AWSModel, and GetKey will return it back.
 func TestSetAndGetKey(t *testing.T) {
-	myKey := NewKMS()
+	myKey := key.NewKMS()
 	server.(*AWSModel).SetKey(myKey)
 	getKey := server.(*AWSModel).GetKey()
 	if getKey == nil {
