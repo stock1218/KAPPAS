@@ -24,3 +24,19 @@ func KeySetUp() Key {
 	var key Key = NewKMS()
 	return key
 }
+
+// TestSetAndGetID tests if SetID will set the ID of a key, and GetID will return it.
+//
+func TestSetAndGetID(t *testing.T) {
+	key := KeySetUp()
+
+	initialID := "123"
+	key.SetID("123")
+	returnedID := key.GetID()
+
+	if initialID != returnedID {
+		t.Log("SetID set the wrong value, or GetID returned the wrong value.")
+		t.Fail()
+	}
+
+}
