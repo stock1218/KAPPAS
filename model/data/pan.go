@@ -1,4 +1,4 @@
-package model
+package data
 
 import (
 	"encoding/json"
@@ -39,6 +39,7 @@ func NewPANFromJSON(newPan string) *PAN {
 	finalPan := PAN{jsonPan.ID, jsonPan.CardNumber, jsonPan.CardHolder, jsonPan.ExperationDate, jsonPan.BillingAddress}
 	return &finalPan
 }
+
 // ToJSON converts a pan struct to a JSON string.
 //
 func (pan PAN) ToJSON() []byte {
