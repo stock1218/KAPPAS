@@ -17,3 +17,10 @@ func TestNewKMS(t *testing.T) {
 		t.Fail()
 	}
 }
+
+// KeySetUp is used as a setup function for creating a testable KMS.
+//
+func KeySetUp() Key {
+	var key Key = NewKMS()
+	return key
+}
