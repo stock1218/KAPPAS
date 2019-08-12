@@ -1,11 +1,14 @@
 package model
 
-import "github.com/stock1218/KAPPAS/model/key"
+import (
+	"github.com/stock1218/KAPPAS/model/database"
+	"github.com/stock1218/KAPPAS/model/key"
+)
 
 // AWSModel is a Model type struct that represents a model that uses AWS services.
 //
 type AWSModel struct {
-	database Database
+	database database.Database
 	key      key.Key
 }
 
@@ -47,13 +50,13 @@ func (model AWSModel) decrypt(ciphertext string) (string, error) {
 
 // GetDatabase gets a copy of the database currently being used.
 //
-func (model AWSModel) GetDatabase() Database {
+func (model AWSModel) GetDatabase() database.Database {
 	return model.database
 }
 
 // SetDatabase sets the pointer to the database currently being used.
 //
-func (model *AWSModel) SetDatabase(newDB Database) {
+func (model *AWSModel) SetDatabase(newDB database.Database) {
 	model.database = newDB
 }
 
