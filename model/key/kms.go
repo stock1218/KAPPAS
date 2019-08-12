@@ -1,6 +1,9 @@
 package key
 
 import (
+	"fmt"
+
+	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/kms"
 )
@@ -23,24 +26,49 @@ func NewKMS(sess session.Session) *KMS {
 
 // GetID gets the ID of the KMS struct.
 //
-func (kms KMS) GetID() string {
-	return kms.ID
+func (key KMS) GetID() string {
+	return key.ID
 }
 
 // SetID sets the ID of the KMS struct.
 //
-func (kms *KMS) SetID(newID string) {
-	kms.ID = newID
+func (key *KMS) SetID(newID string) {
+	key.ID = newID
 }
 
 // GetClient gets the Session of the KMS struct.
 //
-func (kms KMS) GetClient() kms.KMS {
-	return kms.client
+func (key KMS) GetClient() kms.KMS {
+	return key.client
 }
 
 // SetClient gets the Session of the KMS struct.
 //
-func (kms *KMS) SetClient(newClient kms.KMS) {
-	kms.client = newClient
+func (key *KMS) SetClient(newClient kms.KMS) {
+	key.client = newClient
+}
+
+// Encrypt encrypts a string using the AWS KMS service.
+//
+func (key KMS) Encrypt(plaintext string) string {
+	result, _ := key.client.Encrypt(&kms.EncryptInput{
+		KeyId:     aws.String(key.ID),
+		Plaintext: []byte(plaintext),
+	})
+
+	return result.GoString()
+}
+
+// Decrypt decrypts a string using the AWS KMS service.
+//
+func (key KMS) Decrypt(ciphertext string) string {
+	result, err := key.client.Decrypt(&kms.DecryptInput{
+		CiphertextBlob: []byte(ciphertext),
+	})
+
+	if err != nil {
+		fmt.Println("Error: ", err)
+	}
+
+	return result.GoString()
 }

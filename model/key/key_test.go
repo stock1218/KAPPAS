@@ -1,6 +1,7 @@
 package key
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -73,4 +74,27 @@ func TestSetAndGetClient(t *testing.T) {
 		t.Log("SetSession set the incorrect value, or GetSession returned the wrong value")
 		t.Fail()
 	}
+}
+
+// TestEncryptAndDecrypt tests if encrypt and decrypt will encrypt and decrypt a message.
+//
+func TestEncryptAndDecrypt(t *testing.T) {
+	key := KeySetUp()
+
+	plaintext := "this is my secret"
+
+	key.SetID("arn:aws:kms:us-east-1:188809012751:key/9d2beb0f-37d3-480e-ac1f-893754cf1005")
+	ciphertext := key.Encrypt(plaintext)
+	if ciphertext == plaintext {
+		t.Log("Encrypt didn't encrypt the string")
+		t.Fail()
+	}
+
+	decryptedText := key.Decrypt(ciphertext)
+	fmt.Println(decryptedText)
+	if decryptedText != plaintext {
+		t.Log("Decrypt failed to decrypt the string")
+		t.Fail()
+	}
+
 }
