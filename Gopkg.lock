@@ -2,7 +2,7 @@
 
 
 [[projects]]
-  digest = "1:a17f27ecca6c5bdb05baf4dc4b9e1703ff12b04fbbcc72229a823421e788ca33"
+  digest = "1:7605e87542b7c47cbef17d1f9dbc3af76ff5d33e45260653a7480224a6de3fcc"
   name = "github.com/aws/aws-sdk-go"
   packages = [
     "aws",
@@ -30,16 +30,18 @@
     "internal/shareddefaults",
     "private/protocol",
     "private/protocol/json/jsonutil",
+    "private/protocol/jsonrpc",
     "private/protocol/query",
     "private/protocol/query/queryutil",
     "private/protocol/rest",
     "private/protocol/xml/xmlutil",
+    "service/kms",
     "service/sts",
     "service/sts/stsiface",
   ]
   pruneopts = "UT"
-  revision = "b024dccbed5bf4ecdf4718113f282c0ef972a776"
-  version = "v1.21.8"
+  revision = "cc64e16e9a360364e31a969c22e2a0c8d6c4c1cb"
+  version = "v1.22.4"
 
 [[projects]]
   digest = "1:bb81097a5b62634f3e9fec1014657855610c82d19b9a40c17612e32651e35dca"
@@ -54,6 +56,7 @@
   input-imports = [
     "github.com/aws/aws-sdk-go/aws",
     "github.com/aws/aws-sdk-go/aws/session",
+    "github.com/aws/aws-sdk-go/service/kms",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
