@@ -1,4 +1,4 @@
-package model
+package database
 
 // AmazonRDS is a struct that represents a database that uses Amazon RDS.
 //

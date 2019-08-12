@@ -18,7 +18,7 @@ var pan string
 //
 func NewAWSModel() *AWSModel {
 	model := new(AWSModel)
-	model.SetDatabase(NewAmazonRDS())
+	model.SetDatabase(database.NewAmazonRDS())
 	model.SetKey(key.NewKMS())
 	return model
 }
