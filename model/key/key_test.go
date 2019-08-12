@@ -1,6 +1,11 @@
 package key
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/session"
+)
 
 // TestNewKey tests if a Key type variable can be created.
 //
@@ -39,4 +44,22 @@ func TestSetAndGetID(t *testing.T) {
 		t.Fail()
 	}
 
+}
+
+// TestSetAndGetSession tests if SetSession will set the session for a KMS struct, and GetSession will return it.
+//
+func TestSetAndGetSession(t *testing.T) {
+	key := KeySetUp()
+
+	initialSess, _ := session.NewSession(&aws.Config{
+		Region: aws.String("us-west-1")},
+	)
+
+	key.(*KMS).SetSession(*initialSess)
+
+	returnedSess := key.(*KMS).GetSession()
+	if initialSess.Config.Region != returnedSess.Config.Region {
+		t.Log("SetSession set the incorrect value, or GetSession returned the wrong value")
+		t.Fail()
+	}
 }
