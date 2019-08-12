@@ -7,3 +7,13 @@ import "testing"
 func TestNewKey(t *testing.T) {
 	var _ Key = nil
 }
+
+// TestNewKMS tests if a KMS struct can be created.
+//
+func TestNewKMS(t *testing.T) {
+	var key Key = NewKMS()
+	if key == nil {
+		t.Log("Key: failed to create new KMS")
+		t.Fail()
+	}
+}
