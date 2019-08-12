@@ -11,6 +11,8 @@ func TestNewData(t *testing.T) {
 	var _ Data = nil
 }
 
+// TestNewPANModel tests if a PAN type Data variable can be created.
+//
 func TestNewPANModel(t *testing.T) {
 	var pan Data = NewPAN()
 	if pan == nil {
