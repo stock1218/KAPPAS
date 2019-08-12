@@ -1,6 +1,8 @@
 package model
 
 import (
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/stock1218/KAPPAS/model/database"
 	"github.com/stock1218/KAPPAS/model/key"
 )
@@ -17,9 +19,12 @@ var pan string
 // NewAWSModel is a function that returns a pointer to a new AWSModel.
 //
 func NewAWSModel() *AWSModel {
+	sess, _ := session.NewSession(&aws.Config{
+		Region: aws.String("us-west-1")},
+	)
 	model := new(AWSModel)
 	model.SetDatabase(database.NewAmazonRDS())
-	model.SetKey(key.NewKMS())
+	model.SetKey(key.NewKMS(*sess))
 	return model
 }
 

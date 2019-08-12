@@ -3,6 +3,8 @@ package model
 import (
 	"testing"
 
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/stock1218/KAPPAS/model/database"
 	"github.com/stock1218/KAPPAS/model/key"
 )
@@ -89,7 +91,11 @@ func TestSetAndGetDatabase(t *testing.T) {
 
 // TestSetAndGetKey will test if SetKey will set the key used by the AWSModel, and GetKey will return it back.
 func TestSetAndGetKey(t *testing.T) {
-	myKey := key.NewKMS()
+	sess, _ := session.NewSession(&aws.Config{
+		Region: aws.String("us-west-1")},
+	)
+	myKey := key.NewKMS(*sess)
+
 	server.(*AWSModel).SetKey(myKey)
 	getKey := server.(*AWSModel).GetKey()
 	if getKey == nil {
