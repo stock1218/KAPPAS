@@ -23,7 +23,7 @@ func NewAWSModel() *AWSModel {
 		Region: aws.String("us-west-1")},
 	)
 	model := new(AWSModel)
-	model.SetDatabase(database.NewAmazonRDS())
+	model.SetDatabase(database.NewAmazonRDS("", "", ""))
 	model.SetKey(key.NewKMS(*sess))
 	return model
 }

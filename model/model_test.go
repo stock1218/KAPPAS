@@ -76,7 +76,7 @@ func TestEncryptAndDecrypt(t *testing.T) {
 
 // TestSetAndGetDatabase will test to see if SetDatabase will set the database the AWSModel is uing, and GetDatabse will return it.
 func TestSetAndGetDatabase(t *testing.T) {
-	testDB := database.NewAmazonRDS()
+	testDB := database.NewAmazonRDS("", "", "")
 	server.(*AWSModel).SetDatabase(testDB)
 	database := server.(*AWSModel).GetDatabase() // Cast server to a pointer to an AWSModel and call GetDatabase
 
