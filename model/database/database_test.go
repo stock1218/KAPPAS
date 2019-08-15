@@ -18,3 +18,24 @@ func TestNewAmazonRDS(t *testing.T) {
 		t.Fail()
 	}
 }
+
+// DatabaseSetUp will create a testable Database struct
+//
+func DatabaseSetUp() Database {
+	var db Database = NewAmazonRDS()
+	return db
+}
+
+func TestSetAndGetIP(t *testing.T) {
+	db := DatabaseSetUp()
+
+	initialIP := "127.0.0.1"
+
+	db.SetIP(initialIP)
+
+	returnedIP := db.GetIP()
+	if initialIP != returnedIP {
+		t.Log("Database: SetIP set the wrong value, or GetIP returned the wrong value")
+		t.Fail()
+	}
+}
