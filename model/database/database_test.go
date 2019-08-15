@@ -25,8 +25,7 @@ func TestNewAmazonRDS(t *testing.T) {
 //
 func DatabaseSetUp() Database {
 	var db Database = NewAmazonRDS()
-	db.SetIP("127.0.0.1")
-	db.SetPort("5432")
+	db.SetURL("localhost")
 	db.SetUsername("stock1218")
 	return db
 }
@@ -36,29 +35,13 @@ func DatabaseSetUp() Database {
 func TestSetAndGetIP(t *testing.T) {
 	db := DatabaseSetUp()
 
-	initialIP := "127.0.0.1"
+	initialURL := "127.0.0.1"
 
-	db.SetIP(initialIP)
+	db.SetURL(initialURL)
 
-	returnedIP := db.GetIP()
-	if initialIP != returnedIP {
+	returnedURL := db.GetURL()
+	if initialURL != returnedURL {
 		t.Log("Database: SetIP set the wrong value, or GetIP returned the wrong value")
-		t.Fail()
-	}
-}
-
-// TestSetAndGetPort will test if SetPort will set the port of a database struct, and GetPort will return it.
-//
-func TestSetAndGetPort(t *testing.T) {
-	db := DatabaseSetUp()
-
-	initialPort := "1337"
-
-	db.SetPort(initialPort)
-
-	returnedPort := db.GetPort()
-	if initialPort != returnedPort {
-		t.Log("Database: SetPort set the wrong value, or GetPort returned the wrong value")
 		t.Fail()
 	}
 }
