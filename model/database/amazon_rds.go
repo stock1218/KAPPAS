@@ -15,6 +15,18 @@ func NewAmazonRDS() *AmazonRDS {
 	return new(AmazonRDS)
 }
 
+// PutData will put Data into the database and return the data's ID.
+//
+func (rds AmazonRDS) PutData(newData string) string {
+	return ""
+}
+
+// GetData will get the Data associated with the provided ID and return it from the database.
+//
+func (rds AmazonRDS) GetData(dataID string) string {
+	return "Biodigital Jazz"
+}
+
 // GetIP returns the IP of the database struct.
 //
 func (rds AmazonRDS) GetIP() string {

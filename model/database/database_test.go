@@ -1,6 +1,8 @@
 package database
 
-import "testing"
+import (
+	"testing"
+)
 
 // TestNewDatabase will test if a Database struct can be created.
 //
@@ -23,6 +25,9 @@ func TestNewAmazonRDS(t *testing.T) {
 //
 func DatabaseSetUp() Database {
 	var db Database = NewAmazonRDS()
+	db.SetIP("127.0.0.1")
+	db.SetPort("5432")
+	db.SetUsername("stock1218")
 	return db
 }
 
@@ -88,4 +93,20 @@ func TestSetAndGetPassword(t *testing.T) {
 		t.Log("Database: SetPassword set the wrong value, or GetPassword returned the wrong value")
 		t.Fail()
 	}
+}
+
+// TestPutAndGetData tests if PutData will save data to the database, and GetData will return it.
+//
+func TestPutAngGetData(t *testing.T) {
+	db := DatabaseSetUp()
+
+	initialData := "Biodigital Jazz"
+	id := db.PutData(initialData)
+
+	returnedData := db.GetData(id)
+	if initialData != returnedData {
+		t.Log("Database: PutData didn't put the correct value into the database, or GetData didn't return the correct value")
+		t.Fail()
+	}
+
 }
