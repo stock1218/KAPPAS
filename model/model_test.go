@@ -2,6 +2,9 @@ package model
 
 import (
 	"testing"
+	"time"
+
+	"github.com/stock1218/KAPPAS/model/data"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -27,23 +30,26 @@ var server Model = NewAWSModel()
 
 // TestPutAndGetPAN tests if PutPAN will take a string, return an id, and GetPAN() will retrieve it.
 func TestPutAndGetPAN(t *testing.T) {
-	data := "123"
-	id, ok := server.PutPAN(data)
+	myPAN := data.NewPAN()
+	myPAN.SetBillingAddress("Flynn's arcade")
+	myPAN.SetCardHolder("Alan Bradly")
+	myPAN.SetCardNumber("123456789")
+	myPAN.SetExperationDate(time.Now())
+	ok := server.PutPAN(myPAN)
 
 	if ok != nil {
 		t.Log("Failed to call PutPAN: ", ok)
 		t.Fail()
-	} else if id == "" {
+	} else if myPAN.GetID() == "" {
 		t.Log("PutPAN returned an empty string")
 		t.Fail()
 	}
 
-	getData, ok := server.GetPAN(id)
-
+	getData, ok := server.GetPAN(myPAN.GetID())
 	if ok != nil {
 		t.Log("Error retrieving PAN: ", ok)
 		t.Fail()
-	} else if data != getData {
+	} else if myPAN != getData {
 		t.Log("Retrieved data was not correct")
 		t.Fail()
 	}

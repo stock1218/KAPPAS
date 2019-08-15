@@ -3,6 +3,7 @@ package model
 import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/stock1218/KAPPAS/model/data"
 	"github.com/stock1218/KAPPAS/model/database"
 	"github.com/stock1218/KAPPAS/model/key"
 )
@@ -30,18 +31,20 @@ func NewAWSModel() *AWSModel {
 
 // PutPAN takes the data to be saved, and returns the id of the saved data, and an error if there is one.
 //
-func (model AWSModel) PutPAN(data string) (string, error) {
-	ciphertext := model.key.Encrypt(data)
+func (model AWSModel) PutPAN(newData *data.PAN) error {
+	ciphertext := model.key.Encrypt(string(newData.ToJSON()))
 	newID := model.database.PutData(ciphertext)
-	return newID, nil
+	newData.SetID(newID)
+	return nil
 }
 
 // GetPAN takes the ID of the PAN being fetched, and returns the saved data, and an error if there is one.
 //
-func (model AWSModel) GetPAN(id string) (string, error) {
+func (model AWSModel) GetPAN(id string) (data.Data, error) {
 	ciphertext := model.database.GetData(id)
 	plaintext := model.key.Decrypt(ciphertext)
-	return plaintext, nil
+	returnedPAN := data.NewPANFromJSON(plaintext)
+	return returnedPAN, nil
 
 }
 
