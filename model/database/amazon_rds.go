@@ -6,6 +6,7 @@ type AmazonRDS struct {
 	IP       string
 	port     string
 	username string
+	password string
 }
 
 // NewAmazonRDS is a function that returns a pointer to a new AmazonRDS struct.
@@ -48,4 +49,16 @@ func (rds AmazonRDS) GetUsername() string {
 //
 func (rds *AmazonRDS) SetUsername(newUsername string) {
 	rds.username = newUsername
+}
+
+// GetPassword will get the password used when connecting to the database.
+//
+func (rds AmazonRDS) GetPassword() string {
+	return rds.password
+}
+
+// SetPassword will set the password used when connecting to the database.
+//
+func (rds *AmazonRDS) SetPassword(newPass string) {
+	rds.password = newPass
 }

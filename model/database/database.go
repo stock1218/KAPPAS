@@ -9,4 +9,6 @@ type Database interface {
 	GetPort() string     // Get the port of the Database struct
 	SetUsername(string)  // Set the username to use when connecting to the Database
 	GetUsername() string // Get the username used by the database struct
+	SetPassword(string)  // Set the password to use when connecting to the database
+	GetPassword() string // Get the password used by the database struct
 }

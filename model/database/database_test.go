@@ -73,3 +73,19 @@ func TestSetAndGetUsername(t *testing.T) {
 		t.Fail()
 	}
 }
+
+// TestSetAndGetPassword tests if SetPassword will set the password of a database struct, and GetPassword will return it.
+//
+func TestSetAndGetPassword(t *testing.T) {
+	db := DatabaseSetUp()
+
+	initialPassword := "I fight for the users"
+
+	db.SetPassword(initialPassword)
+
+	returnedPassword := db.GetPassword()
+	if initialPassword != returnedPassword {
+		t.Log("Database: SetPassword set the wrong value, or GetPassword returned the wrong value")
+		t.Fail()
+	}
+}
