@@ -41,3 +41,19 @@ func TestSetAndGetIP(t *testing.T) {
 		t.Fail()
 	}
 }
+
+// TestSetAndGetPort will test if SetPort will set the port of a database struct, and GetPort will return it.
+//
+func TestSetAndGetPort(t *testing.T) {
+	db := DatabaseSetUp()
+
+	initialPort := "1337"
+
+	db.SetPort(initialPort)
+
+	returnedPort := db.GetPort()
+	if initialPort != returnedPort {
+		t.Log("Database: SetPort set the wrong value, or GetPort returned the wrong value")
+		t.Fail()
+	}
+}
