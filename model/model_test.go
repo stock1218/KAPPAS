@@ -49,31 +49,6 @@ func TestPutAndGetPAN(t *testing.T) {
 	}
 }
 
-// TestEncryptAndDecrypt will test if encrypt() will take a plaintext string and encrypt it,
-// and decrypt() will decrypt the ciphertext back into plaintext.
-func TestEncryptAndDecrypt(t *testing.T) {
-	plaintext := "my secret"
-	ciphertext, ok := server.encrypt(plaintext)
-
-	if ok != nil {
-		t.Log("Error encrypting data: ", ok)
-		t.Fail()
-	} else if ciphertext == "" {
-		t.Log("encrypt() returned an empty string")
-	}
-
-	decrypted, ok := server.decrypt(ciphertext)
-
-	if ok != nil {
-		t.Log("Error decrypting data: ", ok)
-		t.Fail()
-	} else if decrypted != plaintext {
-		t.Log("Decrypt() returned wrong plaintext")
-		t.Fail()
-	}
-
-}
-
 // TestSetAndGetDatabase will test to see if SetDatabase will set the database the AWSModel is uing, and GetDatabse will return it.
 func TestSetAndGetDatabase(t *testing.T) {
 	testDB := database.NewAmazonRDS("", "", "")
