@@ -13,7 +13,7 @@ func TestNewDatabase(t *testing.T) {
 // TestNewAmazonRDS tests if an amazonRDS struct can be created.
 //
 func TestNewAmazonRDS(t *testing.T) {
-	var database Database = NewAmazonRDS()
+	var database Database = NewAmazonRDS("localhost/kappas", "stock1218", "")
 
 	if database == nil {
 		t.Log("Database: failed to create AmazonRDS struct")
@@ -24,9 +24,7 @@ func TestNewAmazonRDS(t *testing.T) {
 // DatabaseSetUp will create a testable Database struct.
 //
 func DatabaseSetUp() Database {
-	var db Database = NewAmazonRDS()
-	db.SetURL("localhost")
-	db.SetUsername("stock1218")
+	var db Database = NewAmazonRDS("localhost/kappas", "stock1218", "")
 	return db
 }
 
