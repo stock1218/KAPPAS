@@ -8,7 +8,7 @@ func TestNewDatabase(t *testing.T) {
 	var _ Database = nil
 }
 
-// TestNewAmazonRDS tests if an amazonRDS struct can be created
+// TestNewAmazonRDS tests if an amazonRDS struct can be created.
 //
 func TestNewAmazonRDS(t *testing.T) {
 	var database Database = NewAmazonRDS()
@@ -19,13 +19,15 @@ func TestNewAmazonRDS(t *testing.T) {
 	}
 }
 
-// DatabaseSetUp will create a testable Database struct
+// DatabaseSetUp will create a testable Database struct.
 //
 func DatabaseSetUp() Database {
 	var db Database = NewAmazonRDS()
 	return db
 }
 
+// TestSetAndGetIP tests if SetIP will set the ip of a database struct, and GetIP will return it.
+//
 func TestSetAndGetIP(t *testing.T) {
 	db := DatabaseSetUp()
 
