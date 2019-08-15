@@ -3,8 +3,9 @@ package database
 // AmazonRDS is a struct that represents a database that uses Amazon RDS.
 //
 type AmazonRDS struct {
-	IP   string
-	port string
+	IP       string
+	port     string
+	username string
 }
 
 // NewAmazonRDS is a function that returns a pointer to a new AmazonRDS struct.
@@ -35,4 +36,16 @@ func (rds AmazonRDS) GetPort() string {
 //
 func (rds *AmazonRDS) SetPort(newPort string) {
 	rds.port = newPort
+}
+
+// GetUsername will return the username currently being used to connect to the database.
+//
+func (rds AmazonRDS) GetUsername() string {
+	return rds.username
+}
+
+// SetUsername will set the username used when connecting to the database.
+//
+func (rds *AmazonRDS) SetUsername(newUsername string) {
+	rds.username = newUsername
 }

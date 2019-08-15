@@ -57,3 +57,19 @@ func TestSetAndGetPort(t *testing.T) {
 		t.Fail()
 	}
 }
+
+// TestSetAndGetUsername tests if SetUsername will set the username of a database struct, and GetUsername will return it.
+//
+func TestSetAndGetUsername(t *testing.T) {
+	db := DatabaseSetUp()
+
+	initialUsername := "Clu"
+
+	db.SetUsername(initialUsername)
+
+	returnedUsername := db.GetUsername()
+	if initialUsername != returnedUsername {
+		t.Log("Database: SetUsername set the wrong value, or GetUsername returned the wrong value")
+		t.Fail()
+	}
+}
