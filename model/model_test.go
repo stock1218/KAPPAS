@@ -50,7 +50,11 @@ func TestPutAndGetPAN(t *testing.T) {
 	if ok != nil {
 		t.Log("Error retrieving PAN: ", ok)
 		t.Fail()
+<<<<<<< HEAD
 	} else if reflect.DeepEqual(myPAN, getData) {
+=======
+	} else if myPAN != getData {
+>>>>>>> 65660cc6403b4160e0385755fd2c4f62b93da0a0
 		t.Log("Retrieved data was not correct")
 		t.Fail()
 	}
