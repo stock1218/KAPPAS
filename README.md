@@ -25,9 +25,9 @@ Contributions are welcome, please make sure you write tests and documentation wh
 - Package archetecture into AWS Cloud Formation
 
 ## Why?
-I built this framework while interning at a startup that wanted to process PAN information for their existing platform. They were using an AWS infrastructure, and they needed to become PCI compliant. I then designed this solution that sucessfuly allowed them to quickly spin up a secure system for processing sensitive information. This framework was also designed to be highly extensible and maintainable, so that it could provide buisness value further into the future.
+I built this framework while interning at a startup that wanted to process PAN information for their existing platform. They were using an AWS infrastructure, and they needed to become PCI compliant. I then designed this solution that successfully allowed them to quickly spin up a secure system for processing sensitive information. This framework was also designed to be highly extensible and maintainable so that it could provide business value further into the future.
 
-Throughout this project I learned a lot about compliance, securty engeneering, and technologies including Go, Docker, gRPC, and AWS.
+Throughout this project, I learned a lot about compliance, security engineering, and technologies including Go, Docker, gRPC, and AWS.
 
 
 ## Useful Links
