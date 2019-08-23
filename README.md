@@ -5,7 +5,7 @@
 </div>
 
 ## Overview
-KAPPAS is a PCI DSS compliant PAN storage framework for Go. It's mainly developed for AWS services, however it's designed to be extensible and could be used in a variety of other environments. It allows services to store and retrieve PAN information quickly and securely.
+KAPPAS is a PCI DSS compliant PAN storage framework for Go. It's mainly developed for AWS services, however, it's designed to be extensible and could be used in a variety of other environments. It allows services to store and retrieve PAN information quickly and securely.
 
 ## What is PCI DSS
 Payment Card Industry Data Security Standard (PCI DSS) is described as:
