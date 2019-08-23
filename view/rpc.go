@@ -16,3 +16,9 @@ func NewRPC() *RPC {
 func (rpc RPC) GetObservers() []func(string) {
 	return rpc.observers
 }
+
+// Register will register an observer function to the RPC.
+//
+func (rpc *RPC) Register(function func(string)) {
+	rpc.observers = append(rpc.observers, function)
+}

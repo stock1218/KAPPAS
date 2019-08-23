@@ -22,9 +22,25 @@ func viewSetup() *RPC {
 	return NewRPC()
 }
 
-// Test if GetObservers will register an observer to a view type.
+// Test if GetObservers will return the observers registered to a view type.
 func TestGetObservers(t *testing.T) {
 	testRPC := viewSetup()
 
 	_ = testRPC.GetObservers()
+}
+
+// Test if Register will register an observer function to a view type.
+func TestRegister(t *testing.T) {
+	testRPC := viewSetup()
+
+	f := func(data string) {}
+	testRPC.Register(f)
+
+	observers := testRPC.GetObservers()
+
+	if observers == nil {
+		t.Log("View: rpc returned nil")
+		t.Fail()
+	}
+
 }
