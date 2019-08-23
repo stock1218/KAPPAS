@@ -18,7 +18,7 @@ At the moment, this is meant to be used as a framework for developing a PAN stor
 
 
 ## Contributions
-Contributions are welcome, please make sure you write tests and documentation when adding new code 🙂
+Contributions are welcome, please make sure you write tests and documentation when modifying code 🙂
 #### TODO
 - Finish gRPC view
 - Package everything up in a docker container
