@@ -22,7 +22,7 @@ Contributions are welcome, please make sure you write tests and documentation wh
 #### TODO
 - Finish gRPC view
 - Package everything up in a docker container
-- Package archetecture into AWS Cloud Formation
+- Package architecture into AWS Cloud Formation
 
 ## Why?
 I built this framework while interning at a startup that wanted to process PAN information for their existing platform. They were using an AWS infrastructure, and they needed to become PCI compliant. I then designed this solution that successfully allowed them to quickly spin up a secure system for processing sensitive information. This framework was also designed to be highly extensible and maintainable so that it could provide business value further into the future.
